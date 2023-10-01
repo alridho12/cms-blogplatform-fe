@@ -1,0 +1,15 @@
+.inp-title {
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 2px #ffc107 solid;
+    width: 100%;
+}
+
+.inp-title:focus {
+    outline: none;
+}
+
+.lbl-banner:hover {
+    color: #ffc107;
+}
