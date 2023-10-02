@@ -1,6 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import ProfileLite from '../profile/ProfileLite';
 import Swal from 'sweetalert2';
+import ModalUpdateProfile from '../modal/ModalUpdateProfile';
 
 function SideBar() {
     const navigate = useNavigate();
@@ -41,10 +42,7 @@ function SideBar() {
                         </div>
                     </div>
                 </Link>
-                <button className="btn btn-link d-flex align-items-center" style={{ fontSize: '17px', fontWeight: "500", color: "#BABABA" }}>
-                    <i style={{ fontSize: '25px', color: "#BABABA" }} className="bi bi-nut"></i>
-                    <p style={{ margin: 0 }} className='ml-2'>Setting</p>
-                </button>
+                <ModalUpdateProfile />
                 <div id='lgt'>
                     <button onClick={handleLogout} className="btn btn-link d-flex align-items-center" style={{ fontSize: '17px', fontWeight: "500", color: "#BABABA" }}>
                         <i style={{ fontSize: '25px', color: "#BABABA" }} className="bi bi-box-arrow-in-left"></i>

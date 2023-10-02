@@ -48,6 +48,10 @@
     margin-top: 410px;
 }
 
+#ip:focus{
+    outline: none;
+}
+
 @media only screen and (max-width:1280px) {
     #lgt{
         margin-top: 214px;
