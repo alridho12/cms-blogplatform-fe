@@ -21,6 +21,8 @@ const CreateArticle = () => {
                 ['link'],
                 ['image'],
                 ['clean'],
+                [{ align: "left" }, { align: "center" }, { align: "right" }, { align: "justify" }],
+
             ],
         },
     };
@@ -34,6 +36,7 @@ const CreateArticle = () => {
         'bullet',
         'link',
         'image',
+        'align'
     ];
 
 

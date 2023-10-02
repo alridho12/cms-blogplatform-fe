@@ -22,6 +22,8 @@ const UpdateArticle = () => {
                 ['link'],
                 ['image'],
                 ['clean'],
+                [{ align: "left" }, { align: "center" }, { align: "right" }, { align: "justify" }],
+
             ],
         },
     };
@@ -35,13 +37,15 @@ const UpdateArticle = () => {
         'bullet',
         'link',
         'image',
+        'align'
     ];
+
 
 
     let [data, setData] = useState({
         user_id: "",
         title: "",
-        banner:""
+        banner: ""
     })
 
     useEffect(() => {
@@ -84,7 +88,7 @@ const UpdateArticle = () => {
         } else if (!selectedFile && data.banner !== null) {
             setData({
                 ...data,
-                banner:data.banner,
+                banner: data.banner,
             });
         }
     };
