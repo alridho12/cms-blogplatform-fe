@@ -65,8 +65,8 @@ const Login = () => {
         </div>
         <div className='col-6 d-flex justify-content-start align-items-center'>
           <form onSubmit={handleLogin} className='d-flex justify-content-center flex-column'>
-            <input name='email' value={login.email} onChange={handleChange} type="email" className='inpemail mb-3 p-2' placeholder="Email" />
-            <input name='password' value={login.password} onChange={handleChange} type="password" className='inppassword mb-3 p-2' placeholder="Password" />
+            <input required name='email' value={login.email} onChange={handleChange} type="email" className='inpemail mb-3 p-2' placeholder="Email" />
+            <input required name='password' value={login.password} onChange={handleChange} type="password" className='inppassword mb-3 p-2' placeholder="Password" />
             <div className='d-flex justify-content-center'><button type="submit" className='btn btn-warning text-light login'>Log in</button></div>
             <hr style={{ border: "1px white solid", width: "255px" }} />
             <div className='row m-0 d-flex justify-content-between align-items-center'>

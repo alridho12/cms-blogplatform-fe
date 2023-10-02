@@ -4,14 +4,15 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import '../CRUD/app.css'
 import Swal from 'sweetalert2';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useEffect } from 'react';
 
-const CreateArticle = () => {
+const UpdateArticle = () => {
     const idUser = localStorage.getItem("id")
+    const { id } = useParams()
     const [content, setContent] = useState('');
-    const [bannerPreview, setBannerPreview] = useState(null);
+    const [banner, setBanner] = useState('');
     const navigate = useNavigate();
-
     const modules = {
         toolbar: {
             container: [
@@ -37,13 +38,26 @@ const CreateArticle = () => {
     ];
 
 
-
     let [data, setData] = useState({
         user_id: "",
         title: "",
+        banner:""
     })
 
-    let [banner, setBanner] = useState(null)
+    useEffect(() => {
+        axios
+            .get(`https://cms-blogplatform-backend.vercel.app/article/${id}`)
+            .then((res) => {
+                setData(res.data.data[0])
+                setContent(res.data.data.content)
+                setBanner(res.data.data.banner);
+
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+    }, [id])
+
 
     let handleChange = (e) => {
         setData({
@@ -53,19 +67,35 @@ const CreateArticle = () => {
         console.log(data);
     }
 
-    let handleUpload = (e) => {
-        setBanner(e.target.files[0]);
-        setBannerPreview(URL.createObjectURL(e.target.files[0]));
-    }
 
+    const handleUpload = (event) => {
+        const selectedFile = event.target.files[0];
+        if (selectedFile) {
+            setData({
+                ...data,
+                banner: selectedFile,
+            });
+
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setBanner(reader.result);
+            };
+            reader.readAsDataURL(selectedFile);
+        } else if (!selectedFile && data.banner !== null) {
+            setData({
+                ...data,
+                banner:data.banner,
+            });
+        }
+    };
     let handleSubmit = (e) => {
         e.preventDefault();
         const formData = new FormData();
         formData.append("user_id", data.user_id);
         formData.append("title", data.title);
         formData.append("content", content);
-        formData.append("banner", banner);
-        axios.post(`https://cms-blogplatform-backend.vercel.app/article`, formData, {
+        formData.append("banner", data.banner);
+        axios.put(`https://cms-blogplatform-backend.vercel.app/article/${id}`, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data',
             },
@@ -73,7 +103,7 @@ const CreateArticle = () => {
             .then((res) => {
                 console.log(res);
                 Swal.fire({
-                    title: 'Create success',
+                    title: 'Updated success',
                     showConfirmButton: false,
                     icon: 'success',
                     target: '#custom-target',
@@ -86,7 +116,7 @@ const CreateArticle = () => {
                     position: 'bottom-right',
                 });
                 setTimeout(function () {
-                    navigate("/dashboard");
+                    navigate("/myarticle");
                 }, 1000);
             })
             .catch((err) => {
@@ -118,20 +148,18 @@ const CreateArticle = () => {
                         accept="image/*"
                         onChange={handleUpload}
                     />
-                    {bannerPreview && (
-                        <div className=' d-flex justify-content-center'>
-                            <img
-                                src={bannerPreview}
-                                alt="Banner Preview"
-                                style={{ maxWidth: '50%', maxHeight: '50%', marginTop: '10px', }}
-                            />
-                        </div>
-                    )}
+                    <div className=' d-flex justify-content-center'>
+                        <img
+                            src={banner || data.banner}
+                            alt="Banner Preview"
+                            style={{ maxWidth: '50%', maxHeight: '50%', marginTop: '10px', }}
+                        />
+                    </div>
                 </div>
                 <div className="form-group">
                     <label style={{ fontSize: "17px", fontWeight: "500" }}>Content:</label>
                     <ReactQuill
-                        value={content}
+                        value={content || data.content}
                         onChange={setContent}
                         modules={modules}
                         formats={formats}
@@ -144,11 +172,11 @@ const CreateArticle = () => {
                     onChange={handleChange}
                 />
                 <div className=' d-flex justify-content-center'>
-                    <button className='btn btn-warning text-white mb-3 rounded' style={{ fontSize: "17px", fontWeight: "500", width: "250px", height: "50px" }} type="submit">Publish Article</button>
+                    <button className='btn btn-warning text-white mb-3 rounded' style={{ fontSize: "17px", fontWeight: "500", width: "250px", height: "50px" }} type="submit">Edit Article</button>
                 </div>
             </form>
         </div>
     )
 }
 
-export default CreateArticle
+export default UpdateArticle

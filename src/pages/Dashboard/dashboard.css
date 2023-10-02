@@ -23,6 +23,14 @@
     box-shadow: 0 2px 30px rgba(0, 0, 0, 0.1);
 }
 
+.box-articles {
+    width: 50%;
+    height: 100px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 30px rgba(0, 0, 0, 0.1);
+}
+
 #group {
     position: absolute;
     z-index: -1;
@@ -34,4 +42,15 @@
     position: relative ;
     width: 100%;
     height: 100%;
+}
+
+#lgt {
+    margin-top: 410px;
+}
+
+@media only screen and (max-width:1280px) {
+    #lgt{
+        margin-top: 214px;
+    }
+    
 }

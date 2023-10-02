@@ -6,7 +6,7 @@ import '../CRUD/app.css'
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 
-const CreateArticle = () => {
+const Test = () => {
     const idUser = localStorage.getItem("id")
     const [content, setContent] = useState('');
     const [bannerPreview, setBannerPreview] = useState(null);
@@ -144,11 +144,11 @@ const CreateArticle = () => {
                     onChange={handleChange}
                 />
                 <div className=' d-flex justify-content-center'>
-                    <button className='btn btn-warning text-white mb-3 rounded' style={{ fontSize: "17px", fontWeight: "500", width: "250px", height: "50px" }} type="submit">Publish Article</button>
+                    <button className='btn btn-warning text-white mb-3 rounded' style={{ fontSize: "17px", fontWeight: "500", width: "250px", height: "50px" }} type="submit">Create Article</button>
                 </div>
             </form>
         </div>
     )
 }
 
-export default CreateArticle
+export default Test

@@ -7,6 +7,8 @@ import Dashboard from '../../pages/Dashboard/Dashboard';
 import CreateArticle from '../../pages/CRUD/CreateArticle';
 import RequireAuth from '../../pages/Auth/RequireAuth';
 import MyArticle from '../../pages/Dashboard/MyArticle';
+import UpdateArticle from '../../pages/CRUD/UpdateArticle';
+import Test from '../../pages/CRUD/Test';
 
 
 const Router = () => {
@@ -15,20 +17,14 @@ const Router = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<RequireAuth><Dashboard /></RequireAuth>} />
+          <Route path='/test' element={<Test />} />
           <Route path='/create' element={<RequireAuth><CreateArticle /></RequireAuth>} />
+          <Route path='/update/:id'element={<RequireAuth><UpdateArticle /></RequireAuth>} />
           <Route path="/dashboard" element={<RequireAuth><Dashboard /></RequireAuth>} />
           <Route path="/myarticle" element={<RequireAuth><MyArticle /></RequireAuth>}/>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/pages404" element={<Pages404 />} />
-          {/* <Route
-            path="/profile"
-            element={
-              <RequireAuth>
-                <Profile />
-              </RequireAuth>
-            }
-          /> */}
         </Routes>
       </BrowserRouter>
     </div>
