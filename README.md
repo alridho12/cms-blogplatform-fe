@@ -151,4 +151,4 @@ Contributions are what make the open source community such an amazing place to b
 
 :rocket: [`Demo CMS`](https://cms-blogplatform-fe.vercel.app/)
 
-Project link : [peworldfe](https://github.com/alridho12/cms-blogplatform-fe/)
+Project link : [Sharelock Holmes](https://github.com/alridho12/cms-blogplatform-fe/)
